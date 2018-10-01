@@ -15,22 +15,23 @@ var io = socketIo(server);
 io.on('connection',(socket)=>{
   console.log(`Connected to client ${socket}`);
 
-    socket.emit('newUser',{
-      from:'admin',
+    socket.emit('newMessage',{
+      from:'Admin',
       text:'Welcome to chat app'
     });
 
-  socket.broadcast.emit('newUser',{
+  socket.broadcast.emit('newMessage',{
     from:'Admin',
     text:'New user joined'
   });
 
-  socket.on('createMessage',(data)=>{
+  socket.on('createMessage',(data,callback)=>{
     io.emit('newMessage',{
       from:data.from,
       text:data.text,
       createdAt:new Date().getTime()
-    })
+    });
+    callback();
   });
 
 });
