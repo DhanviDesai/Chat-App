@@ -3,6 +3,6 @@
     console.log('Connected to the server');
     });
 
-    socket.on('newMessage',function(data){
+    socket.on('newUser',function(data){
       console.log(data);
     });

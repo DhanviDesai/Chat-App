@@ -15,6 +15,16 @@ var io = socketIo(server);
 io.on('connection',(socket)=>{
   console.log(`Connected to client ${socket}`);
 
+    socket.emit('newUser',{
+      from:'admin',
+      text:'Welcome to chat app'
+    });
+
+  socket.broadcast.emit('newUser',{
+    from:'Admin',
+    text:'New user joined'
+  });
+
   socket.on('createMessage',(data)=>{
     io.emit('newMessage',{
       from:data.from,
