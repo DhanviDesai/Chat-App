@@ -15,14 +15,12 @@ var io = socketIo(server);
 io.on('connection',(socket)=>{
   console.log(`Connected to client ${socket}`);
 
-  socket.emit('newMessage',{
-    from:'Dhanvi',
-    text:'Hey, Can you meet up!',
-    createdAt:new Date()
-  });
-
-  socket.on('messageFromClient',(data)=>{
-    console.log(data);
+  socket.on('createMessage',(data)=>{
+    io.emit('newMessage',{
+      from:data.from,
+      text:data.text,
+      createdAt:new Date().getTime()
+    })
   });
 
 });
