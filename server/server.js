@@ -34,6 +34,13 @@ io.on('connection',(socket)=>{
     callback();
   });
 
+  socket.on('shareLocation',(data,callback)=>{
+    io.emit('newLocation',{
+      from:data.from,
+      link:`https://www.google.com/maps/@${data.latitude},${data.longitude},17z`
+    });
+    callback();
+  });
 });
 
 app.use(express.static(publicPath));
